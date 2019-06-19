@@ -13,7 +13,7 @@ public class DialogueSystem : MonoBehaviour
     private bool isDialogue = false;
 
     List<Dictionary<string, object>> dialogue;
-    
+
     void Start()
     {
         dialogue = CSVReader.Read(txtf);
@@ -39,24 +39,27 @@ public class DialogueSystem : MonoBehaviour
         OnOff(false);
         isDialogue = false;
     }
-
+    
     private void NextDialogue()
     {
+        Transform textPos = txt.transform;
+
         txt.text = (string)dialogue[count]["dialog"];
         if ((int) dialogue[count]["name"] == 1)
         {
-            txt.color = Color.white;
-            txt.fontSize = 18;
+            txt.color = Color.red;
+            txt.fontSize = 20;
             Vector3 v1 = new Vector3(0, 0, 0);
-
-            //버튼
+            //마샤
             Vector3 v2 = GameObject.Find("마샤").GetComponent<Transform>().position;
-
             //메리
             Vector3 v3 = GameObject.Find("메리").GetComponent<Transform>().position;
 
-            v1.x = (v2.x - v3.x)*-1;
-            v1.y = v2.y + 2;
+            Vector3 b1 = GameObject.Find("Button").GetComponent<Transform>().position;
+
+
+            v1.x = b1.x + (v3.x-v2.x)* 0.5f;
+            v1.y = b1.y;
 
             txt.GetComponent<RectTransform>().position = v1;
 
@@ -65,8 +68,8 @@ public class DialogueSystem : MonoBehaviour
         }
         if ((int)dialogue[count]["name"] == 2)
         {
-            txt.color = Color.gray;
-            txt.fontSize = 15;
+            txt.color = Color.black;
+            txt.fontSize = 20;
             Vector3 v1 = new Vector3(0, 0, 0);
 
             //버튼
@@ -75,10 +78,13 @@ public class DialogueSystem : MonoBehaviour
             //메리
             Vector3 v3= GameObject.Find("메리").GetComponent<Transform>().position;
 
-            v1.x = v2.x - v3.x;
-            v1.y = v2.y + 2;
-      
-            txt.GetComponent<RectTransform>().position = v1; 
+            Vector3 b1 = GameObject.Find("Button").GetComponent<RectTransform>().position;
+
+
+            v1.x = b1.x - (v3.x - v2.x)*2;
+            v1.y = b1.y;
+
+            txt.GetComponent<RectTransform>().position = v1;
 
             Debug.Log(v1);
         }
