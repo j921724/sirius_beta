@@ -13,7 +13,7 @@ public class DialogueSystem : MonoBehaviour
     private bool isDialogue = false;
 
     List<Dictionary<string, object>> dialogue;
-    
+
     void Start()
     {
         dialogue = CSVReader.Read(txtf);
@@ -39,27 +39,29 @@ public class DialogueSystem : MonoBehaviour
         OnOff(false);
         isDialogue = false;
     }
-
+    
     private void NextDialogue()
     {
+        Transform textPos = txt.transform;
+
         txt.text = (string)dialogue[count]["dialog"];
         if ((int) dialogue[count]["name"] == 1)
         {
             txt.color = Color.red;
             txt.fontSize = 30;
-            txt.GetComponent<RectTransform>().position = new Vector3(-5, 0, 0);
+            textPos.localPosition = new Vector3(-5, 0, 0);  
         }
         if ((int)dialogue[count]["name"] == 2)
         {
             txt.color = Color.green;
             txt.fontSize = 30;
-            txt.GetComponent<RectTransform>().position = new Vector3(-10, 0, 0);
+            textPos.localPosition = new Vector3(-10, 0, 0);
         }
         if ((int)dialogue[count]["name"] == 3)
         {
             txt.color = Color.white;
             txt.fontSize = 30;
-            txt.GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
+            textPos.localPosition = new Vector3(-10, 0, 0);
         }
         count++;
     }
