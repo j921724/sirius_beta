@@ -8,6 +8,7 @@ public class DialogueSystem : MonoBehaviour
     public string txtf;
     public Text txt;
     public Image panel;
+    public Image skipButton;
 
     private int count = 0;
     private bool isDialogue = false;
@@ -17,12 +18,10 @@ public class DialogueSystem : MonoBehaviour
     string txtContents;
 
     List<Dictionary<string, object>> dialogue;
-    
+
     void Start()
     {
         dialogue = CSVReader.Read(txtf);
-
-        
     }
 
     IEnumerator ShowText()
@@ -39,6 +38,7 @@ public class DialogueSystem : MonoBehaviour
     public void OnOff(bool _flag)
     {
         panel.gameObject.SetActive(_flag);
+        skipButton.gameObject.SetActive(_flag);
         txt.gameObject.SetActive(_flag);
     }
 
@@ -55,9 +55,10 @@ public class DialogueSystem : MonoBehaviour
         OnOff(false);
         isDialogue = false;
     }
-
+    
     private void NextDialogue()
     {
+
         txt.text = (string)dialogue[count]["dialog"];
         StartCoroutine(ShowText());
         if ((int) dialogue[count]["name"] == 1)
