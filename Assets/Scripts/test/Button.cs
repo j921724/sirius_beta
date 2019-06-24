@@ -4,19 +4,39 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    public GameObject npc;
+    private GameObject npc;
+    private GameObject target;
+
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        npc = transform.root.gameObject;
+        if (FindObjectOfType<Controll>() != null)
+        {
+            target = FindObjectOfType<Controll>().gameObject;
+        }
+        print(target);
+        print(npc);
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 vector; 
-        vector = transform.position;
-        vector.x = npc.GetComponent<Transform>().position.x; 
-        transform.position = vector; 
+        if (target != null)
+        {
+            if (Mathf.Abs(transform.position.x - target.transform.position.x) < 4.0f)
+            {
+                gameObject.SetActive(true);
+            }
+        }
     }
+
+    private void OnMouseDown()
+    {
+        npc.GetComponent<DialogueSystem>().ShowDialogue();
+        print("dd");
+        gameObject.SetActive(false);
+    }
+    
 }

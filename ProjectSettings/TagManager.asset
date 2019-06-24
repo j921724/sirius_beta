@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Mary
+  - Medlock
   layers:
   - Default
   - TransparentFX
@@ -41,9 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: background
+  - name: Background
     uniqueID: 1130688845
     locked: 0
-  - name: character
+  - name: Character
     uniqueID: 221869995
+    locked: 0
+  - name: Interaction
+    uniqueID: 4199150721
+    locked: 0
+  - name: Dialogue
+    uniqueID: 3411397877
     locked: 0

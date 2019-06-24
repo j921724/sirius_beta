@@ -74,24 +74,24 @@ public class DialogueSystem : MonoBehaviour
     public void SetDialoguePosition(string npcName)
     {
         Vector3 v1 = new Vector3(0, 0);
-        Vector3 v2 = GameObject.FindWithTag("Player").GetComponent<Transform>().position;
+        Vector3 v2 = GameObject.FindWithTag("Mary").GetComponent<Transform>().position;
         Vector3 v3 = GameObject.FindWithTag(npcName).GetComponent<Transform>().position;
         
         if (v2.x - v3.x < 0) // 플레이어가 왼쪽에 있을 시
         {
-            txtPlayer = new Vector3(v2.x - 3f, v2.y + 4f);
-            txtNPC = new Vector3(v3.x + 3f, v2.y + 4f);
+            txtPlayer = new Vector3(v2.x - 3f, v2.y + 12f);
+            txtNPC = new Vector3(v3.x + 3f, v2.y + 12f);
         }
         else
         {
-            txtPlayer = new Vector3(v2.x + 3f, v2.y + 4f);
-            txtNPC = new Vector3(v3.x - 3f, v2.y + 4f);
+            txtPlayer = new Vector3(v2.x + 3f, v2.y + 12f);
+            txtNPC = new Vector3(v3.x - 3f, v2.y + 12f);
         }
     }
 
     IEnumerator ShowText()
     {
-        for (int i = 0; i <= fulltext.Length; i+=3)    // 글자 하나하나씩 출력
+        for (int i = 0; i <= fulltext.Length; i++)    // 글자 하나하나씩 출력
         {
             string currentText = fulltext.Substring(0, i);
             txt.text = currentText;
