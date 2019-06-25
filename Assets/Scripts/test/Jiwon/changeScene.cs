@@ -12,11 +12,10 @@ public class changeScene : MonoBehaviour
 {
     public string moveScene;    //이동할 씬
     public Vector3 movePos;     //이동한 씬에서 캐릭터 위치
-    public GameObject Mary;
+    private GameObject Mary;
 
     public void changeFirstScene()
     {
-        SceneManager.LoadScene("TestNPC");
         SceneManager.LoadScene(moveScene);
         Mary.GetComponent<Transform>().position = movePos;
         Thread.Sleep(500);
@@ -25,6 +24,6 @@ public class changeScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        Mary = GameObject.Find("메리");
     }
 }

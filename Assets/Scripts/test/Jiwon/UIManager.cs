@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UI : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    private UI instance = null;
+    static private UIManager instance;
 
     // Start is called before the first frame update
     void Start()
