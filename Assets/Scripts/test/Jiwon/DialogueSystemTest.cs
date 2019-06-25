@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogueSystem : MonoBehaviour
+public class DialogueSystemTest : MonoBehaviour
 {
     public string txtf; // 스크립트 파일 이름
-    public Text txt; // 텍스트 오브젝트
-    public Image panel; // 대화 중 다른 기능 금지
-    public Image skipButton; // 스킵 버튼
-    public GameObject dialogueButton;  // 대화 버튼
+    private Text txt; // 텍스트 오브젝트
+    private Image panel; // 대화 중 다른 기능 금지
+    private Image skipButton; // 스킵 버튼
+    private GameObject dialogueButton;  // 대화 버튼
+    private GameObject dialogueUI;   // 대화 UI
+
     [SerializeField] private float delay = 0.01f;
     [SerializeField] private float error = 8.0f;
 
@@ -24,13 +26,17 @@ public class DialogueSystem : MonoBehaviour
 
     void Start()
     {
-        if(GameObject.FindWithTag("Mary") != null)
+        if (GameObject.FindWithTag("Mary") != null)
         {
             player = GameObject.FindWithTag("Mary").gameObject;
         }
         dialogue = CSVReader.Read(txtf);
-
-    }
+        dialogueUI = GameObject.Find("Dialogue UI");
+        txt = dialogueUI.transform.Find("Dialogue Text").GetComponent<Text>();
+        panel = dialogueUI.transform.Find("Dialogue Panel").GetComponent<Image>();
+        skipButton= dialogueUI.transform.Find("Skip Button").GetComponent<Image>(); 
+        dialogueButton= transform.Find("button").gameObject;
+}
 
     private void OnOff(bool _flag)
     {
@@ -54,7 +60,7 @@ public class DialogueSystem : MonoBehaviour
         OnOff(false);
         isDialogue = false;
     }
-    
+
     private void NextDialogue()
     {
         string fulltext = (string)dialogue[count]["dialog"];
@@ -92,7 +98,7 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-   private void ChangeText()
+    private void ChangeText()
     {
         if ((int)dialogue[count]["name"] == 1) // 메리
         {
@@ -106,7 +112,7 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-   public void ShowButton()
+    public void ShowButton()
     {
         Vector3 playerPos = player.transform.position; // Player 위치
         Vector3 npcPos = transform.position; // NPC 위치
@@ -121,9 +127,9 @@ public class DialogueSystem : MonoBehaviour
         }
     }
 
-   void Update()
+    void Update()
     {
-        
+
         if (isDialogue)
         {
             if (Input.GetMouseButtonDown(0))
