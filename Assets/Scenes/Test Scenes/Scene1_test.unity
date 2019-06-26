@@ -292,6 +292,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21037007}
   m_CullTransparentMesh: 0
+--- !u!1 &102965850 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7313691721015790293, guid: b09be6b818d363647816e635426d09c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6542327848222080621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &104448871
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +872,11 @@ PrefabInstance:
       propertyPath: delay
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: dialogueButton
+      value: 
+      objectReference: {fileID: 102965850}
     - target: {fileID: 3068274918083944676, guid: b09be6b818d363647816e635426d09c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1029,6 +1040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8013437081200219953, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 746c28a2a8860d4459d15859c0d936f9, type: 3}
