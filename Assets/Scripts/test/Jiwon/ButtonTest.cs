@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class ButtonTest : MonoBehaviour
 {
     private GameObject npc;
 
@@ -21,9 +21,16 @@ public class Button : MonoBehaviour
 
     private void OnMouseDown()
     {
-       npc.GetComponent<DialogueSystem>().ShowDialogue();
+        if (npc.tag == "Portal")
+        {
+            npc.GetComponent<changeScene>().changeFirstScene();
+        }
+        else
+        {
+            npc.GetComponent<DialogueSystemTest>().ShowDialogue();
+        }
 
         //gameObject.SetActive(false);
     }
-    
+
 }
