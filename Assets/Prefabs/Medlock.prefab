@@ -93,11 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66359ce06737904488d414696e0ea134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txtf: scene1
-  txt: {fileID: 0}
-  panel: {fileID: 0}
-  skipButton: {fileID: 0}
-  delay: 0.01
+  txtFile: 
+  setTextPosition: 0
+  dialogueTextPosion:
+    txtPlayer: {x: -150, y: 200, z: 0}
+    txtNPC: {x: 150, y: 200, z: 0}
 --- !u!1 &7313691721015790293
 GameObject:
   m_ObjectHideFlags: 0
