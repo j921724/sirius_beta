@@ -9,9 +9,8 @@ public class DialogueSystem : MonoBehaviour
     public Image dialogueBox;
     public Text txt; // 텍스트 오브젝트
     public Image panel; // 대화 중 다른 기능 금지
-    public Image skipButton; // 스킵 버튼
+    //public Button skipButton; // 스킵 버튼
     public GameObject dialogueButton;  // 대화 버튼
-    //[SerializeField] private float delay = 0.01f;
     [SerializeField] private float error = 8.0f;
 
     private GameObject player; // 플레이어 오브젝트 
@@ -36,7 +35,6 @@ public class DialogueSystem : MonoBehaviour
     private void OnOff(bool _flag)
     {
         panel.gameObject.SetActive(_flag);
-        skipButton.gameObject.SetActive(_flag);
         dialogueBox.gameObject.SetActive(_flag);
         txt.gameObject.SetActive(_flag);
         dialogueButton.SetActive(_flag);
@@ -73,13 +71,13 @@ public class DialogueSystem : MonoBehaviour
 
         if (playerPos.x - npcPos.x < 0) // 플레이어가 왼쪽에 있을 시
         {
-            txtPlayer = new Vector3(playerPos.x - 3f, playerPos.y + 10.0f);
-            txtNPC = new Vector3(npcPos.x + 3f, playerPos.y + 10.0f);
+            txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f);
+            txtNPC = new Vector3(150.0f, 200.0f, 0.0f);
         }
         else
         {
-            txtPlayer = new Vector3(playerPos.x + 3f, playerPos.y + 10.0f);
-            txtNPC = new Vector3(npcPos.x - 3f, playerPos.y + 10.0f);
+            txtPlayer = new Vector3(150.0f, 200.0f, 0.0f);
+            txtNPC = new Vector3(-150.0f, 200.0f, 0.0f);
         }
     }
 
@@ -93,18 +91,22 @@ public class DialogueSystem : MonoBehaviour
     //    }
     //}
 
-   private void ChangeText()
+   public void ChangeText()
     {
         if ((int)dialogue[count]["name"] == 1) // 메리
         {
-            txt.color = Color.red;
-            dialogueBox.GetComponent<RectTransform>().localPosition = new Vector3(150.0f,-20.0f,0.0f);
+            txt.color = Color.black;
+            dialogueBox.GetComponent<RectTransform>().localPosition = txtPlayer;
         }
         if ((int)dialogue[count]["name"] == 2) // 메들록
         {
-            txt.color = Color.black;
-            dialogueBox.GetComponent<RectTransform>().localPosition = new Vector3(-150.0f, -20.0f, 0.0f);
-            print(dialogueBox.GetComponent<RectTransform>().localPosition);
+            txt.color = Color.red;
+            dialogueBox.GetComponent<RectTransform>().localPosition = txtNPC;
+        }
+        if ((int)dialogue[count]["name"] == 3) // 마샤
+        {
+            txt.color = Color.blue;
+            dialogueBox.GetComponent<RectTransform>().localPosition = txtNPC;
         }
     }
 
