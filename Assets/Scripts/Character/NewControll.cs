@@ -22,6 +22,8 @@ public class NewControll : MonoBehaviour
         float height = Screen.height;
         float width = Screen.width;
 
+
+        // 텔레포트할 시 도플갱어 삭제
         if (instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
@@ -45,13 +47,13 @@ public class NewControll : MonoBehaviour
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject() == true) return; // UI창 나오면 클릭 금지
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             targetpos = Input.mousePosition; // 클릭시 스크린에서의 마우스 포지션
 
             moveit = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+        else//(Input.GetMouseButtonUp(0))
         {
             moveit = false;
         }
