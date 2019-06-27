@@ -35,7 +35,7 @@ public class DialogueSystemTest : MonoBehaviour
         txt = dialogueUI.transform.Find("Dialogue Text").GetComponent<Text>();
         panel = dialogueUI.transform.Find("Dialogue Panel").GetComponent<Image>();
         skipButton= dialogueUI.transform.Find("Skip Button").GetComponent<Image>(); 
-        dialogueButton= transform.Find("button").gameObject;
+        dialogueButton= transform.Find("Dialogue Button").gameObject;
 }
 
     private void OnOff(bool _flag)
