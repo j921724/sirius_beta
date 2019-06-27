@@ -112,24 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &21037009 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5072769194358770579, guid: 07cb84f4bf6fcb24a8124e905f2e2071,
-    type: 3}
-  m_PrefabInstance: {fileID: 5072769194337793090}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &102965850 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7313691721015790293, guid: b09be6b818d363647816e635426d09c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 6542327848222080621}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &104448871
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,18 +288,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &317463923 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5072769194653673777, guid: 07cb84f4bf6fcb24a8124e905f2e2071,
-    type: 3}
-  m_PrefabInstance: {fileID: 5072769194337793090}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &904617795
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,12 +517,12 @@ PrefabInstance:
         type: 3}
       propertyPath: txt
       value: 
-      objectReference: {fileID: 21037009}
+      objectReference: {fileID: 0}
     - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
         type: 3}
       propertyPath: panel
       value: 
-      objectReference: {fileID: 317463923}
+      objectReference: {fileID: 0}
     - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
         type: 3}
       propertyPath: skipButton
@@ -567,11 +537,41 @@ PrefabInstance:
         type: 3}
       propertyPath: dialogueButton
       value: 
-      objectReference: {fileID: 102965850}
+      objectReference: {fileID: 0}
     - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
         type: 3}
       propertyPath: txtf
-      value: scene11
+      value: scene1_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: setTextPosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: txtFile
+      value: scene1_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: dialogueTextPosion.txtPlayer.x
+      value: -150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: dialogueTextPosion.txtPlayer.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: dialogueTextPosion.txtNPC.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880217420908575959, guid: b09be6b818d363647816e635426d09c8,
+        type: 3}
+      propertyPath: dialogueTextPosion.txtNPC.y
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3068274918083944676, guid: b09be6b818d363647816e635426d09c8,
         type: 3}
@@ -740,6 +740,11 @@ PrefabInstance:
     - target: {fileID: 5412503852052591976, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5412503852052591976, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: moveit
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

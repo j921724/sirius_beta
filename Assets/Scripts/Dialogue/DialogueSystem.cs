@@ -3,24 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class DialogueTextPosion
+{
+    public Vector3 txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f); // 플레이어 쪽 텍스트 위치
+    public Vector3 txtNPC = new Vector3(150.0f, 200.0f, 0.0f);// NPC 쪽 텍스트 위치
+}
+
 public class DialogueSystem : MonoBehaviour
 {
-    public string txtf; // 스크립트 파일 이름
-    public Image dialogueBox;
-    public Text txt; // 텍스트 오브젝트
-    public Image panel; // 대화 중 다른 기능 금지
-    //public Button skipButton; // 스킵 버튼
-    public GameObject dialogueButton;  // 대화 버튼
-    [SerializeField] private float error = 8.0f;
+   
+    // 텍스트 UI를 연동하기 위한 변수
+    public string txtFile; // 스크립트 파일 이름
+    private Image dialogueBox;
+    private Text txt; // 텍스트 오브젝트
+    private Image panel; // 대화 중 다른 기능 금지
+    private GameObject dialogueButton;  // 대화 버튼
+    private GameObject dialogueUI;   // 대화 UI
 
+    // 인게임 대화에 필요한 변수
     private GameObject player; // 플레이어 오브젝트 
+    private float error = 8.0f; // 버튼 출력하기 위한 거리
     private int count = 0; // 텍스트 문서 단위
     private bool talking = false; // 텍스트 UI 활성화 트리거
 
+    // 텍스트 위치에 필요한 변수 
+    public bool setTextPosition; // 사용자 정의 위치로 설정
+    public DialogueTextPosion dialogueTextPosion;
     Vector3 txtPlayer; // 플레이어 쪽 텍스트 위치
     Vector3 txtNPC; // NPC 쪽 텍스트 위치
 
-    List<Dictionary<string, object>> dialogue;
+
+    List<Dictionary<string, object>> dialogueData;
 
     void Start()
     {
@@ -28,8 +42,14 @@ public class DialogueSystem : MonoBehaviour
         {
             player = GameObject.FindWithTag("Mary").gameObject;
         }
-        dialogue = CSVReader.Read(txtf);
-        dialogueBox = txt.transform.parent.GetComponent<Image>();
+        dialogueButton = transform.Find("Dialogue Button").gameObject;
+
+        dialogueData = CSVReader.Read(txtFile);
+        dialogueUI = GameObject.Find("Dialogue UI");
+        dialogueBox = dialogueUI.transform.Find("Dialogue Box").GetComponent<Image>();
+        txt = dialogueBox.transform.Find("Dialogue Text").GetComponent<Text>();
+        panel = dialogueUI.transform.Find("Dialogue Panel").GetComponent<Image>();
+ 
     }
 
     private void OnOff(bool _flag)
@@ -59,25 +79,33 @@ public class DialogueSystem : MonoBehaviour
         //string fulltext = (string)dialogue[count]["dialog"];
 
         ChangeText();
-        txt.text = (string)dialogue[count]["dialog"];
+        txt.text = (string)dialogueData[count]["dialog"];
         //StartCoroutine(ShowText(fulltext));
         count++;
     }
 
     private void SetDialoguePosition()
     {
-        Vector3 playerPos = player.transform.position; // Player 위치
-        Vector3 npcPos = transform.position; // NPC 위치
-
-        if (playerPos.x - npcPos.x < 0) // 플레이어가 왼쪽에 있을 시
+        if (setTextPosition)
         {
-            txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f);
-            txtNPC = new Vector3(150.0f, 200.0f, 0.0f);
+            txtPlayer = dialogueTextPosion.txtPlayer;
+            txtNPC = dialogueTextPosion.txtNPC;
         }
         else
         {
-            txtPlayer = new Vector3(150.0f, 200.0f, 0.0f);
-            txtNPC = new Vector3(-150.0f, 200.0f, 0.0f);
+            Vector3 playerPos = player.transform.position; // Player 위치
+            Vector3 npcPos = transform.position; // NPC 위치
+
+            if (playerPos.x - npcPos.x < 0) // 플레이어가 왼쪽에 있을 시
+            {
+                txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f);
+                txtNPC = new Vector3(150.0f, 200.0f, 0.0f);
+            }
+            else
+            {
+                txtPlayer = new Vector3(150.0f, 200.0f, 0.0f);
+                txtNPC = new Vector3(-150.0f, 200.0f, 0.0f);
+            }
         }
     }
 
@@ -93,17 +121,17 @@ public class DialogueSystem : MonoBehaviour
 
    public void ChangeText()
     {
-        if ((int)dialogue[count]["name"] == 1) // 메리
+        if ((int)dialogueData[count]["name"] == 1) // 메리
         {
             txt.color = Color.black;
             dialogueBox.GetComponent<RectTransform>().localPosition = txtPlayer;
         }
-        if ((int)dialogue[count]["name"] == 2) // 메들록
+        if ((int)dialogueData[count]["name"] == 2) // 메들록
         {
             txt.color = Color.red;
             dialogueBox.GetComponent<RectTransform>().localPosition = txtNPC;
         }
-        if ((int)dialogue[count]["name"] == 3) // 마샤
+        if ((int)dialogueData[count]["name"] == 3) // 마샤
         {
             txt.color = Color.blue;
             dialogueBox.GetComponent<RectTransform>().localPosition = txtNPC;
@@ -134,7 +162,7 @@ public class DialogueSystem : MonoBehaviour
             dialogueButton.SetActive(false);
             if (Input.GetMouseButtonDown(0))
             {
-                if (count < dialogue.Count)
+                if (count < dialogueData.Count)
                 {
                     NextDialogue();
                     print(count);
