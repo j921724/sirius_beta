@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
         if (collision.tag == "item")
         {
             items.Add(itemName, "1");
-            Debug.Log(collision.name);
+           // Debug.Log(collision.name);
             Destroy(GameObject.Find(itemName));
         }
         else
