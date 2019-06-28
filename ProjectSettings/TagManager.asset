@@ -7,6 +7,7 @@ TagManager:
   - Mary
   - Medlock
   - Portal
+  - item
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1130688845
+    locked: 0
+  - name: item
+    uniqueID: 3781694233
     locked: 0
   - name: Character
     uniqueID: 221869995
