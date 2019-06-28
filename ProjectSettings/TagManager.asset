@@ -7,6 +7,7 @@ TagManager:
   - Mary
   - Medlock
   - Portal
+  - wall
   layers:
   - Default
   - TransparentFX
