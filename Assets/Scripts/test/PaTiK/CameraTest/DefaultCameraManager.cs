@@ -5,19 +5,34 @@ using UnityEngine;
 public class DefaultCameraManager : MonoBehaviour
 {
     static public DefaultCameraManager instance;
-    public GameObject target; // 카메라가 따라갈 대상
-    public float moveSpeed; // 카메라가 얼마나 빠른 속도로
-    private Vector3 targetPosition; // target의 위치
+
+    public GameObject target; // 카메라가 따라갈 대상.
+
+    private Vector3 targetPosition; // 대상의 현재 위치 
+    private Vector3 minBound;  
+    private Vector3 maxBound;
+
+    public float moveSpeed; // 카메라 속도
+    private float halfWidth;
+    private float halfHeight;
+
+    public BoxCollider2D bound; // 카메라 활동 영역
+    
+    private Camera getCamera; 
 
 
+    public void SetBound(BoxCollider2D newBound)
+    {
+        bound = newBound;
+        minBound = bound.bounds.min;
+        maxBound = bound.bounds.max;
+    }
 
 
-
-
-
-    // Start is called before the first frame update 
+    // Use this for initialization
     void Start()
     {
+
         if (instance == null)
         {
             DontDestroyOnLoad(this.gameObject);
@@ -27,23 +42,35 @@ public class DefaultCameraManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+
+        getCamera = GetComponent<Camera>();
+        minBound = bound.bounds.min;
+        maxBound = bound.bounds.max;
+        halfHeight = getCamera.orthographicSize;
+        halfWidth = halfHeight * Screen.width / Screen.height;
     }
 
 
-
-
-
-    // Update is called once per frame
-    public void Update()
+        // Update is called once per frame
+        void Update()
     {
+
         if (target.gameObject != null)
         {
-            targetPosition.Set(target.transform.position.x, this.transform.position.y, this.transform.position.z); // z값은 카메라 값으로
+            targetPosition.Set(target.transform.position.x, target.transform.position.y, this.transform.position.z);
 
-            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime); 
+
+            float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
+            float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
+
+            this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);       // clap() 함수로 영역 제한
+
         }
-
-
     }
+
+   
 }
+
+
 

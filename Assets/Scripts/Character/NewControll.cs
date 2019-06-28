@@ -7,20 +7,39 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class NewControll : MonoBehaviour
 {
+    //---------------------------------------------------------------------------------------------
+    private NewControll instance = null;
 
-    public float speed; // 캐릭터 이동 속도
+   
     public bool moveit = false; // 이동 가능 여부
 
-    private NewControll instance = null;
+    public BoxCollider2D boundBox;  // 맵 바운더리 지정
+    public BoxCollider2D characterBox;// 캐릭터 바운더리 지정
+
     private Vector3 targetpos; // 마우스 좌표
-    float rightButtonSec;
-    float leftButtonSec;
+    private Vector3 minBound;
+    private Vector3 maxBound;
+
+    private float halfWidth;
+    private float rightButtonSec;
+    private float leftButtonSec;
+    public float speed; // 캐릭터 이동 속도
+    
+    
+    //---------------------------------------------------------------------------------------------
 
     // Start is called before the first frame update
     void Start()
     {
-        float height = Screen.height;
-        float width = Screen.width;
+        //---------------------------------------------------------------------------------------------
+        minBound = boundBox.bounds.min; 
+        maxBound = boundBox.bounds.max;
+        
+        halfWidth = (characterBox.size.x)/2f;
+
+        float screenHeight = Screen.height; // 스크린 높이
+        float screenWidth = Screen.width;   // 스크린 넓이
+       //---------------------------------------------------------------------------------------------
 
 
         // 텔레포트할 시 도플갱어 삭제
@@ -35,8 +54,8 @@ public class NewControll : MonoBehaviour
         }
 
 
-        rightButtonSec = (width / 4) * 3;
-        leftButtonSec = width / 4;
+        rightButtonSec = (screenWidth / 4) * 3;
+        leftButtonSec = screenWidth / 4;
 
         Debug.Log(leftButtonSec);
 
@@ -46,6 +65,13 @@ public class NewControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ////캐릭터의 이동 가능 x축 y축 제한
+        //float clampedX = Mathf.Clamp(transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
+        //float clampedY = Mathf.Clamp(transform.position.y, minBound.y, maxBound.y); 
+
+        //transform.position = new Vector3(clampedX, clampedY, 0);    
+        //---------------------------------------------------------------------------------------------
+
         if (EventSystem.current.IsPointerOverGameObject() == true) return; // UI창 나오면 클릭 금지
         if (Input.GetMouseButton(0))
         {
@@ -53,24 +79,30 @@ public class NewControll : MonoBehaviour
 
             moveit = true;
         }
+
         else//(Input.GetMouseButtonUp(0))
         {
             moveit = false;
         }
 
+        //---------------------------------------------------------------------------------------------
 
         if (moveit)
         {
             float dis = targetpos.x; // 마우스 클릭지점
 
-            if (dis > rightButtonSec)
+            if (dis > rightButtonSec && this.transform.position.x <= maxBound.x - halfWidth)
             {
+                transform.eulerAngles = new Vector3(0, 0, 0);
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
-            else if (dis < leftButtonSec)
+            else if (dis < leftButtonSec && this.transform.position.x >= minBound.x + halfWidth) // 플레이어 터치 가능위치 제한, 캐릭터 이동위치 제한
             {
-                transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+                transform.eulerAngles = new Vector3(0, 180, 0);
+                transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
         }
+        //---------------------------------------------------------------------------------------------
     }
 }
