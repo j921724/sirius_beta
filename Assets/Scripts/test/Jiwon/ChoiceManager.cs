@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+/*
+* 에러 있음
+  선택지 창의 text가 모두 뜨기 전에 클릭하면 index 에러 뜸  
+     (out of range error)
+*/
 
 public class ChoiceManager : MonoBehaviour
 {
@@ -153,11 +158,15 @@ public class ChoiceManager : MonoBehaviour
     void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject() == false) return; // UI가 아니면 return
+
         if (Input.GetMouseButtonDown(0))
         {   // 마우스 위치의 오브젝트를 반환
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Ray2D ray = new Ray2D(pos, Vector2.zero);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            if (hit.collider == null) return;   // 선택지 UI 가 아닐 경우 return (ex. dialogue)
+
             if (hit.collider.gameObject.name == "Answer Panal 0")
             {
                 result = 0;

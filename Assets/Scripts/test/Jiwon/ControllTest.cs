@@ -16,7 +16,7 @@ public class ControllTest : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D col)    // 벽에 부딪히면 멈춤
     {
-        if (col.gameObject.tag == "wall")
+        if (col.gameObject.name == "rightwall" || col.gameObject.name == "leftwall")
         {
             targetpos = gameObject.transform.position;
         }
