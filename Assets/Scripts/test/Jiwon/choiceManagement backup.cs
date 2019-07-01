@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ChoiceManager : MonoBehaviour
+public class choiceManagerbackup : MonoBehaviour
 {
-    public static ChoiceManager instance;
+    public static choiceManagerbackup instance;
 
     #region Singleton
     private void Awake()
@@ -49,11 +49,18 @@ public class ChoiceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //go = GameObject.Find("Choice System");
+        //questionText = go.transform.Find("Question Text").GetComponent<Text>(); // 여기 수정
+        //anim = GameObject.Find("Choice System").GetComponent<Animator>();
+
+
+
         theAudio = FindObjectOfType<AudioManager>();
         answerList = new List<string>();
-        
         for (int i = 0; i <= 1; i++)
         {
+            //answerText[i] = go.transform.Find("Answer Text "+ i).GetComponent<Text>();
+            //answerText[i] = go.transform.Find("Answer Text " + i).GetComponent<Text>();
             answerText[i].text = "";
             answerPanel[i].SetActive(false);
         }
@@ -64,7 +71,7 @@ public class ChoiceManager : MonoBehaviour
     {
         choiceIng = true;
         go.SetActive(true);
-        result = 0;    // 첫번째 선택지로 초기화
+        result = 0;
         question = _choice.question;
         for (int i = 0; i < _choice.answers.Length; i++)
         {
@@ -84,11 +91,6 @@ public class ChoiceManager : MonoBehaviour
         return result;
     }
 
-    public void SetResult(int r)
-    {
-        result = r;
-    }
-
     public void ExitChoice()
     {
         questionText.text = "";
@@ -102,6 +104,7 @@ public class ChoiceManager : MonoBehaviour
         answerList.Clear();
         choiceIng = false;  // 선택 종료
         go.SetActive(false);
+
     }
 
     // 아래의 서브 코루틴을 모두 실행
@@ -158,19 +161,71 @@ public class ChoiceManager : MonoBehaviour
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Ray2D ray = new Ray2D(pos, Vector2.zero);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider.gameObject.name == "Answer Panal 0")
+            //ray.origin = new Vector2(0.0f,0.0f);
+            //ray.direction = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+            if (hit.collider.name == "Answer Panal 0")
             {
-                result = 0;
+                Debug.Log("null");
             }
-            else if (hit.collider.gameObject.name == "Answer Panal 1")
+            else
             {
-                result = 1;
+                Debug.Log("not null");
             }
+
+            //if (!hit)
+            //{
+            //    Debug.Log(ray.origin);
+            //    Debug.Log(ray.direction);
+
+            //    Debug.Log("null");
+            //}
+            //else
+            //{
+            //    if (hit.collider.gameObject.name == "Answer Panal 0")
+            //    {
+            //        result = 0;
+            //    }
+            //    else if (hit.collider.gameObject.name == "Answer Panal 1")
+            //    {
+            //        result = 1;
+            //    }
+            //}
+
             ExitChoice();
         }
+
+        //if (keyInput)   // 키를 입력하는 동안 선택지 변경
+        //{
+        //    if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    {
+        //        theAudio.Play(keySound);
+        //        if (result > 0)
+        //            result--;
+        //        else
+        //            result = count;
+        //        Selection();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.DownArrow))
+        //    {
+        //        theAudio.Play(keySound);
+        //        if (result < count)
+        //            result++;
+        //        else
+        //            result = 0;
+        //        Selection();
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.Z))
+        //    {
+        //        theAudio.Play(enterSound);
+        //        keyInput = false;
+        //        ExitChoice();
+        //    }
+        //}
+
     }
 
-    // 어떤 게 선택 되었는지 색상으로 알려줌 >> 클릭시 색상 변화하는 걸로 수정할 것.(todo)
+    // 어떤 게 선택 되었는지 색상으로 알려줌
     public void Selection()
     {
         Color color = answerPanel[0].GetComponent<Image>().color;
