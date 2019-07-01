@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     public Hashtable items = new Hashtable();
     string itemName = "";
-
+    private GameObject itemMent;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,8 +15,13 @@ public class Inventory : MonoBehaviour
         if (collision.tag == "item")
         {
             items.Add(itemName, "1");
-           // Debug.Log(collision.name);
+            itemMent = GameObject.Find("ItemTalker");
+           
             Destroy(GameObject.Find(itemName));
+
+            itemMent.GetComponent<itemExplanation>().showItemText(1, itemName);
+            Debug.Log(collision.name);
+       
         }
         else
         {
@@ -32,4 +37,6 @@ public class Inventory : MonoBehaviour
         }
 
     }
+
+
 }
