@@ -17,11 +17,11 @@ public class Inventory : MonoBehaviour
             items.Add(itemName, "1");
             itemMent = GameObject.Find("ItemTalker");
            
-            //Destroy(GameObject.Find(itemName));
 
+            //Debug.Log(collision.name);
+            
             itemMent.GetComponent<itemExplanation>().showItemText(1, itemName);
-            Debug.Log(collision.name);
-       
+            Destroy(GameObject.Find(itemName));
         }
         else
         {
