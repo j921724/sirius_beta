@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 76855148}
   m_Layer: 0
   m_Name: leftwall
-  m_TagString: wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -948,10 +948,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   choice:
-    question: qqq
+    question: move next stage?
     answers:
-    - hello
-    - wow
+    - no
+    - yes
   flag: 0
 --- !u!1 &287296688
 GameObject:
@@ -1814,7 +1814,7 @@ GameObject:
   - component: {fileID: 1305218648}
   m_Layer: 0
   m_Name: rightwall
-  m_TagString: wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
