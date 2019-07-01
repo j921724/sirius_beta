@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour
             items.Add(itemName, "1");
             itemMent = GameObject.Find("ItemTalker");
            
-            Destroy(GameObject.Find(itemName));
+            //Destroy(GameObject.Find(itemName));
 
             itemMent.GetComponent<itemExplanation>().showItemText(1, itemName);
             Debug.Log(collision.name);
