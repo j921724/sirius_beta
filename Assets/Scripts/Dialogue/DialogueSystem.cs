@@ -34,7 +34,7 @@ public class DialogueSystem : MonoBehaviour
     Vector3 txtNPC; // NPC 쪽 텍스트 위치
 
     // 카메라 조작에 필요한 변수
-    public DollyZoom cameraCtrl;
+    //public DollyZoom cameraCtrl;
 
     List<Dictionary<string, object>> dialogueData;
 
@@ -161,7 +161,7 @@ public class DialogueSystem : MonoBehaviour
         
         if (talking) // 대화중
         {
-            cameraCtrl.dollyZoomIn = true;
+            //cameraCtrl.dollyZoomIn = true;
             dialogueButton.SetActive(false);
             if (Input.GetMouseButtonDown(0))
             {
@@ -176,7 +176,7 @@ public class DialogueSystem : MonoBehaviour
         }
         else
         {
-            cameraCtrl.dollyZoomIn = false;
+            //cameraCtrl.dollyZoomIn = false;
             ShowButton();
         }
     }
