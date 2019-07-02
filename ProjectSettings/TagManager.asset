@@ -7,6 +7,8 @@ TagManager:
   - Mary
   - Medlock
   - Portal
+  - Background
+  - Martha
   layers:
   - Default
   - TransparentFX

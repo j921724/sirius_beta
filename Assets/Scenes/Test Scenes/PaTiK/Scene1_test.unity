@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1315806938}
   moveSpeed: 3
+  boundBox: {fileID: 0}
 --- !u!114 &104448876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,12 +842,27 @@ PrefabInstance:
     - target: {fileID: 7889691863593573343, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
       propertyPath: m_GravityScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7889691863593573343, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: boundBox
+      value: 
+      objectReference: {fileID: 294598916}
+    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: characterBox
+      value: 
+      objectReference: {fileID: 1315806942}
+    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8013437081200219953, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
@@ -858,6 +874,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8013437081200219953, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: characterBox
+      value: 
+      objectReference: {fileID: 1315806942}
+    - target: {fileID: 8013437081200219953, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: boundBox
+      value: 
+      objectReference: {fileID: 294598916}
     - target: {fileID: 5412503852052591976, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
       propertyPath: m_Enabled
@@ -878,21 +904,6 @@ PrefabInstance:
       propertyPath: boundBox
       value: 
       objectReference: {fileID: 294598916}
-    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
-        type: 3}
-      propertyPath: boundBox
-      value: 
-      objectReference: {fileID: 294598916}
-    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
-        type: 3}
-      propertyPath: characterBox
-      value: 
-      objectReference: {fileID: 1315806942}
-    - target: {fileID: 8437957459866376714, guid: 746c28a2a8860d4459d15859c0d936f9,
-        type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5412503852052591976, guid: 746c28a2a8860d4459d15859c0d936f9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 746c28a2a8860d4459d15859c0d936f9, type: 3}
