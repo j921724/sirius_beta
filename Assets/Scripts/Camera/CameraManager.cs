@@ -5,18 +5,30 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     static public CameraManager instance;
-    public GameObject target; // 카메라가 따라갈 대상
-    public float moveSpeed; // 카메라가 얼마나 빠른 속도로
-    private Vector3 targetPosition; // target의 위치
+
+    public GameObject target; // 카메라가 따라갈 대상.
+
+    private Vector3 targetPosition; // 대상의 현재 위치 
+    private Vector3 minBound;
+    private Vector3 maxBound;
+
+    public float moveSpeed; // 카메라 속도
+    private float halfWidth;
+    private float halfHeight;
+
+    public BoxCollider2D boundBox; // 카메라 활동 영역
+
+    private Camera getCamera;
 
 
+    public void SetBound(BoxCollider2D newBound)
+    {
+        boundBox = newBound;
+        minBound = boundBox.bounds.min;
+        maxBound = boundBox.bounds.max;
+    }
 
-
-
-
-
-    // Start is called before the first frame update 
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -29,20 +41,43 @@ public class CameraManager : MonoBehaviour
         }
     }
 
-    
-    
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Mary");
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
 
+        getCamera = GetComponent<Camera>();
+        minBound = boundBox.bounds.min;
+        maxBound = boundBox.bounds.max;
+        halfHeight = getCamera.orthographicSize;
+        halfWidth = halfHeight * Screen.width / Screen.height;
+    }
+    private void OnLevelWasLoaded(int level)
+    {
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
+        target = GameObject.FindGameObjectWithTag("Mary");
+        getCamera = GetComponent<Camera>();
+        minBound = boundBox.bounds.min;
+        maxBound = boundBox.bounds.max;
+        halfHeight = getCamera.orthographicSize;
+        halfWidth = halfHeight * Screen.width / Screen.height;
+    }
 
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
+
         if (target.gameObject != null)
         {
-            targetPosition.Set(target.transform.position.x,this.transform.position.y, this.transform.position.z); // z값은 카메라 값으로
+            targetPosition.Set(target.transform.position.x, target.transform.position.y, this.transform.position.z);
 
             this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + halfWidth, maxBound.x - halfWidth);
+            float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
+
+            this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);       // clap() 함수로 영역 제한
+
         }
-
-
     }
 }

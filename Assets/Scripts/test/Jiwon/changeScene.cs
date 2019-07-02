@@ -21,9 +21,14 @@ public class changeScene : MonoBehaviour
         Thread.Sleep(500);
     }
 
+    private void OnMouseDown()
+    {
+        changeFirstScene();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Mary = GameObject.Find("메리");
+        Mary = GameObject.FindGameObjectWithTag("Mary");
     }
 }
