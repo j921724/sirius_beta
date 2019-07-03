@@ -38,11 +38,13 @@ public class Teleport : MonoBehaviour
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray2D ray = new Ray2D(pos, Vector2.zero);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-        if (hit.collider.name == teleportButton.name)
+        if (hit)
         {
-            ChangeFirstScene();
+            if (hit.collider.name == teleportButton.name)
+            {
+                ChangeFirstScene();
+            }
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)

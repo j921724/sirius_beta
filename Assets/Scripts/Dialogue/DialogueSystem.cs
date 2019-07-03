@@ -158,26 +158,27 @@ public class DialogueSystem : MonoBehaviour
 
    void Update()
     {
-        
-        if (talking) // 대화중
-        {
-            //cameraCtrl.dollyZoomIn = true;
-            dialogueButton.SetActive(false);
-            if (Input.GetMouseButtonDown(0))
+
+            if (talking) // 대화중
             {
-                if (count < dialogueData.Count)
+                //cameraCtrl.dollyZoomIn = true;
+                dialogueButton.SetActive(false);
+                if (Input.GetMouseButtonDown(0))
                 {
-                    NextDialogue();
-                    print(count);
+                    if (count < dialogueData.Count)
+                    {
+                        NextDialogue();
+                        print(count);
+                    }
+                    else
+                        HideDialogue();
                 }
-                else
-                    HideDialogue();
             }
-        }
-        else
-        {
-            //cameraCtrl.dollyZoomIn = false;
-            ShowButton();
-        }
+            else
+            {
+                //cameraCtrl.dollyZoomIn = false;
+                ShowButton();
+            }
+
     }
 }
