@@ -9,7 +9,7 @@ using System.Threading;
 /// 
 /// </summary>
 
-public class Teleport : MonoBehaviour
+public class TeleportTest : MonoBehaviour
 {
     public string moveScene;    //이동할 씬
     public Vector3 movePos;     //이동한 씬에서 캐릭터 위치
@@ -38,15 +38,13 @@ public class Teleport : MonoBehaviour
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Ray2D ray = new Ray2D(pos, Vector2.zero);
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-        if (hit)
+        if (hit.collider != null)
         {
             if (hit.collider.name == teleportButton.name)
             {
                 ChangeFirstScene();
             }
         }
-        
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
