@@ -321,6 +321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtFile: Scene1_1
   count: 0
+  talking: 0
   setTextPosition: 1
   eventDialogueTextPosion:
     txtPlayer: {x: 150, y: -50, z: 0}
@@ -337,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62950ca8b10b9fd4b97ddc4163b3baee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Garden
+  sceneName: MaryRoom
 --- !u!1001 &1025095325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,11 +455,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5072769194653673777, guid: 07cb84f4bf6fcb24a8124e905f2e2071,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.11764706
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07cb84f4bf6fcb24a8124e905f2e2071, type: 3}

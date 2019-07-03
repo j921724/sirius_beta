@@ -6,8 +6,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class DialogueTextPosion
 {
-    public Vector3 txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f); // 플레이어 쪽 텍스트 위치
-    public Vector3 txtNPC = new Vector3(150.0f, 200.0f, 0.0f);// NPC 쪽 텍스트 위치
+    public Vector3 txtPlayer = new Vector3(-150.0f, 500.0f, 0.0f); // 플레이어 쪽 텍스트 위치
+    public Vector3 txtNPC = new Vector3(150.0f, 500.0f, 0.0f);// NPC 쪽 텍스트 위치
 }
 
 public class DialogueSystem : MonoBehaviour
@@ -100,13 +100,13 @@ public class DialogueSystem : MonoBehaviour
 
             if (playerPos.x - npcPos.x < 0) // 플레이어가 왼쪽에 있을 시
             {
-                txtPlayer = new Vector3(-150.0f, 200.0f, 0.0f);
-                txtNPC = new Vector3(150.0f, 200.0f, 0.0f);
+                txtPlayer = new Vector3(-150.0f, 500.0f, 0.0f);
+                txtNPC = new Vector3(150.0f, 500.0f, 0.0f);
             }
             else
             {
-                txtPlayer = new Vector3(150.0f, 200.0f, 0.0f);
-                txtNPC = new Vector3(-150.0f, 200.0f, 0.0f);
+                txtPlayer = new Vector3(150.0f, 500.0f, 0.0f);
+                txtNPC = new Vector3(-150.0f, 500.0f, 0.0f);
             }
         }
     }
