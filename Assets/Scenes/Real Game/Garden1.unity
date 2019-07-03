@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveScene: FrontGarden
-  movePos: {x: -50, y: -7, z: 0}
+  movePos: {x: -30, y: -7, z: 0}
 --- !u!61 &164684309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -425,6 +425,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2005473491500685848, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -300692257
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005473491500685848, guid: 746c28a2a8860d4459d15859c0d936f9,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8013437081200219953, guid: 746c28a2a8860d4459d15859c0d936f9,
         type: 3}
       propertyPath: speed
@@ -648,7 +658,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.70793915}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
