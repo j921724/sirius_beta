@@ -1,13 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿using System.Collections;
+using UnityEngine;
+/// <summary>
+/// 달리 줌 스크립트(과연 사용할까영)
+/// </summary>
 public class DollyZoom : MonoBehaviour
 {
     public Transform target;
     public Camera cameraOption;
 
     private float initHeightAtDist;
-    public bool dzEnabled;
     public bool dollyZoomIn;
 
     float FrustumHeightAtDistance(float distance)
@@ -25,13 +26,7 @@ public class DollyZoom : MonoBehaviour
     {
         var distance = Vector3.Distance(transform.position, target.position);
         initHeightAtDist = FrustumHeightAtDistance(distance);
-        dzEnabled = true;
-    }
-
-    // Dolly 줌 종료
-    public void StopDZ()
-    {
-        dzEnabled = false;
+        dollyZoomIn = true;
     }
 
     void Start()
@@ -41,21 +36,18 @@ public class DollyZoom : MonoBehaviour
 
     void Update()
     {
-        if (dzEnabled)
-        {
-            // 시야각과 카메라와 타겟간의 거리 계산 
-            var currDistance = Vector3.Distance(this.transform.position, target.position);
-            cameraOption.fieldOfView = FOVForHeightAndDistance(initHeightAtDist, currDistance);
-        }
 
+        var currDistance = Vector3.Distance(this.transform.position, target.position);
 
 
         if (dollyZoomIn && cameraOption.transform.position.z <= -5)
         {
+            cameraOption.fieldOfView = FOVForHeightAndDistance(initHeightAtDist, currDistance);
             transform.Translate(Vector3.forward * Time.deltaTime * 10f);
         }
         else if (!dollyZoomIn && cameraOption.transform.position.z >= -15)
         {
+            cameraOption.fieldOfView = FOVForHeightAndDistance(initHeightAtDist, currDistance);
             transform.Translate(Vector3.forward * Time.deltaTime * -10f);
         }
     }
