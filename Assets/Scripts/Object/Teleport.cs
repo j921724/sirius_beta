@@ -45,8 +45,6 @@ public class Teleport : MonoBehaviour
                 ChangeFirstScene();
             }
         }
-        
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
