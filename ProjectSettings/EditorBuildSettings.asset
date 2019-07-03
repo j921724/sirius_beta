@@ -6,24 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Jiwon/TestNPC.unity
-    guid: 5e1e187dddfeb1a4bbc84a65d090a6eb
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/Start.unity
-    guid: f93cdb853bdc26341b12aa84122bc02e
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/Garden.unity
-    guid: 2367eee4c731f6049bad210739d6e277
-  - enabled: 1
-    path: Assets/Scenes/Game Scenes/Room.unity
-    guid: c8b80511b03cdaf44ac252cfd6305292
+    path: Assets/Scenes/Real Game/WholeHall.unity
+    guid: a9721776dd81e4c979b1334c203d12bb
   - enabled: 1
     path: Assets/Scenes/Real Game/Hall1.unity
     guid: 26f033f3ba1e545b5b1f799b4ba70e31
-  - enabled: 1
-    path: Assets/Scenes/Real Game/WholeHall.unity
-    guid: a9721776dd81e4c979b1334c203d12bb
   m_configObjects: {}
