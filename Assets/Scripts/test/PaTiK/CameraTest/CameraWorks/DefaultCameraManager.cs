@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// 항상 작동하면서 플레이 캐릭터를 따라가는 카메라 + CameraTargetChange.cs 로 인해 타겟이 바뀌면 타겟을 줌인하며 따라감
+/// </summary>
 public class DefaultCameraManager : MonoBehaviour
 {
     static public DefaultCameraManager instance;
@@ -20,9 +22,9 @@ public class DefaultCameraManager : MonoBehaviour
 
     public BoxCollider2D bound; // 카메라 활동 영역
     
-    private Camera getCamera;
+    public Camera getCamera;
 
-    
+    private ZoomInOut zoomCtrl; // 줌인 줌아웃 컨트롤
 
     public void SetBound(BoxCollider2D newBound)
     {
@@ -46,6 +48,8 @@ public class DefaultCameraManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        // 각 변수 초기화
+        zoomCtrl = GetComponent<ZoomInOut>();
         getCamera = GetComponent<Camera>();
         minBound = bound.bounds.min;
         maxBound = bound.bounds.max;
@@ -62,13 +66,15 @@ public class DefaultCameraManager : MonoBehaviour
         {
             targetPosition.Set(target.transform.position.x, target.transform.position.y+adjustY, this.transform.position.z);
 
-            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime); 
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + (halfWidth + adjustX), maxBound.x - (halfWidth+adjustX));
-            float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
+            if (zoomCtrl.isZoomOut) // 줌인 상황이 아닐때 카메라 활동 범위 제한
+            {
+                float clampedX = Mathf.Clamp(this.transform.position.x, minBound.x + (halfWidth + adjustX), maxBound.x - (halfWidth + adjustX));
+                float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
 
-            this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);       // clap() 함수로 영역 제한
-
+                this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);       // clap() 함수로 영역 제한
+            }
         }
     }
 
