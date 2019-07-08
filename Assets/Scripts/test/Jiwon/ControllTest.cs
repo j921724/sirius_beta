@@ -8,23 +8,22 @@ using UnityEngine.EventSystems;
 public class ControllTest : MonoBehaviour
 {
     static private ControllTest instance;
-    public float speed; // 캐릭터 이동 속도
-    public float error; // 캐릭터와 마우스 좌표와의 오차 범위
+    public float speed = 8; // 캐릭터 이동 속도
+    public float error = 0.5f; // 캐릭터와 마우스 좌표와의 오차 범위
 
     private Vector3 targetpos; // 마우스 좌표
     private bool moveit = false; // 이동 가능 여부
+    private Vector3 minBound;
+    private Vector3 maxBound;
 
-    private void OnCollisionStay2D(Collision2D col)    // 벽에 부딪히면 멈춤
-    {
-        if (col.gameObject.name == "rightwall" || col.gameObject.name == "leftwall")
-        {
-            targetpos = gameObject.transform.position;
-        }
+    public BoxCollider2D boundBox;  // 맵 바운더리 지정
+    public BoxCollider2D characterBox;// 캐릭터 바운더리 지정
 
-    }
+    private float halfWidth;
+    private float rightButtonSec;
+    private float leftButtonSec;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -35,6 +34,41 @@ public class ControllTest : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        characterBox = gameObject.GetComponent<BoxCollider2D>();
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+        //characterBox = gameObject.GetComponent<BoxCollider2D>();
+        //boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
+
+        //if (instance == null)
+        //{
+        //    DontDestroyOnLoad(this.gameObject);
+        //    instance = this;
+        //}
+        //else
+        //{
+        //    //Destroy(this.gameObject);
+        //}
+
+        float screenHeight = Screen.height; // 스크린 높이
+        float screenWidth = Screen.width;   // 스크린 넓이
+
+
+
+        halfWidth = (characterBox.size.x) / 2f;
+        rightButtonSec = (screenWidth / 4) * 3;
+        leftButtonSec = screenWidth / 4;
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        characterBox = gameObject.GetComponent<BoxCollider2D>();
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame

@@ -15,11 +15,13 @@ public class Teleport : MonoBehaviour
     public Vector3 movePos;     //이동한 씬에서 캐릭터 위치
     private GameObject Mary;
     private GameObject teleportButton;
+    private GameData gameData;
 
     void Start()
     {
         Mary = GameObject.FindGameObjectWithTag("Mary");
         teleportButton = gameObject.transform.Find("Teleport Button").gameObject;
+        gameData = GameObject.Find("Main Camera").GetComponent<GameData>();
     }
 
     public void ChangeFirstScene()
@@ -42,7 +44,10 @@ public class Teleport : MonoBehaviour
         {
             if (hit.collider.name == teleportButton.name)
             {
-                ChangeFirstScene();
+                if (gameData.accessibleScene.Contains(moveScene))
+                    ChangeFirstScene();
+                else
+                    Debug.Log("Inccessible Area");
             }
         }
     }

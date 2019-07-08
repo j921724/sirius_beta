@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7889691863593573343}
   - component: {fileID: 6480918356968597092}
   - component: {fileID: 8437957459866376714}
+  - component: {fileID: 1126315387866706419}
   - component: {fileID: 8013437081200219953}
   m_Layer: 0
   m_Name: Mary
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6581655222144050879}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9a82e3232f640940aadc6bac661ae79, type: 3}
   m_Name: 
@@ -176,6 +177,22 @@ MonoBehaviour:
   boundBox: {fileID: 0}
   characterBox: {fileID: 0}
   speed: 0
+--- !u!114 &1126315387866706419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6581655222144050879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fc5539cc1df7f546880a839b1947663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  error: 0.5
+  boundBox: {fileID: 0}
+  characterBox: {fileID: 0}
 --- !u!114 &8013437081200219953
 MonoBehaviour:
   m_ObjectHideFlags: 0
