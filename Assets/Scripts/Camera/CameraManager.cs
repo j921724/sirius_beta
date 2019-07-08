@@ -52,6 +52,7 @@ public class CameraManager : MonoBehaviour
         halfHeight = getCamera.orthographicSize;
         halfWidth = halfHeight * Screen.width / Screen.height;
     }
+
     private void OnLevelWasLoaded(int level)
     {
         boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
@@ -66,7 +67,6 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (target.gameObject != null)
         {
             targetPosition.Set(target.transform.position.x, target.transform.position.y, this.transform.position.z);
@@ -77,7 +77,6 @@ public class CameraManager : MonoBehaviour
             float clampedY = Mathf.Clamp(this.transform.position.y, minBound.y + halfHeight, maxBound.y - halfHeight);
 
             this.transform.position = new Vector3(clampedX, clampedY, this.transform.position.z);       // clap() 함수로 영역 제한
-
         }
     }
 }
