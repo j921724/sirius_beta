@@ -41,20 +41,6 @@ public class Controll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
- 
-        //characterBox = gameObject.GetComponent<BoxCollider2D>();
-        //boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
-
-        //if (instance == null)
-        //{
-        //    DontDestroyOnLoad(this.gameObject);
-        //    instance = this;
-        //}
-        //else
-        //{
-        //    //Destroy(this.gameObject);
-        //}
-
         float screenHeight = Screen.height; // 스크린 높이
         float screenWidth = Screen.width;   // 스크린 넓이
 
