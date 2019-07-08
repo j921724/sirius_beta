@@ -79,11 +79,23 @@ public class DialogueSystem : MonoBehaviour
     private void NextDialogue()
     {
         //string fulltext = (string)dialogue[count]["dialog"];
-
-        ChangeText();
-        txt.text = (string)dialogueData[count]["dialog"];
         //StartCoroutine(ShowText(fulltext));
         count++;
+        if (count >= dialogueData.Count) return;
+        SetText();
+    }
+
+    // 이전 대화로 되돌아가는 함수
+    public void PreviousDialogue()
+    {
+        count -= 2;
+        SetText();
+    }
+    
+    private void SetText()
+    {
+        ChangeText();
+        txt.text = (string)dialogueData[count]["dialog"];
     }
 
     private void SetDialoguePosition()
@@ -163,15 +175,15 @@ public class DialogueSystem : MonoBehaviour
             {
                 //cameraCtrl.dollyZoomIn = true;
                 dialogueButton.SetActive(false);
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonUp(0))
                 {
                     if (count < dialogueData.Count)
-                    {
-                        NextDialogue();
-                        print(count);
-                    }
-                    else
-                        HideDialogue();
+                        {
+                            NextDialogue();
+                            print(count);
+                        }
+                        else
+                            HideDialogue();
                 }
             }
             else

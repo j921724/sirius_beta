@@ -71,10 +71,22 @@ public class Controll : MonoBehaviour
         boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
     }
 
+    // UI 위를 클릭시 이동 금지
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject() == true) return; // UI창 나오면 클릭 금지
+        if (IsPointerOverUIObject()) return; // UI창 나오면 클릭 금지
+
+        
         if (Input.GetMouseButtonDown(0))
         {
             targetpos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
