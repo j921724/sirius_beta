@@ -409,6 +409,7 @@ MonoBehaviour:
   error: 0.1
   boundBox: {fileID: 0}
   characterBox: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!212 &217425177
 SpriteRenderer:
   m_ObjectHideFlags: 0

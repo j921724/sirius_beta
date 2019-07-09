@@ -49,18 +49,10 @@ public class choiceManagerbackup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //go = GameObject.Find("Choice System");
-        //questionText = go.transform.Find("Question Text").GetComponent<Text>(); // 여기 수정
-        //anim = GameObject.Find("Choice System").GetComponent<Animator>();
-
-
-
         theAudio = FindObjectOfType<AudioManager>();
         answerList = new List<string>();
         for (int i = 0; i <= 1; i++)
         {
-            //answerText[i] = go.transform.Find("Answer Text "+ i).GetComponent<Text>();
-            //answerText[i] = go.transform.Find("Answer Text " + i).GetComponent<Text>();
             answerText[i].text = "";
             answerPanel[i].SetActive(false);
         }

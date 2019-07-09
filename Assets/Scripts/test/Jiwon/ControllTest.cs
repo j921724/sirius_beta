@@ -23,6 +23,8 @@ public class ControllTest : MonoBehaviour
     private float rightButtonSec;
     private float leftButtonSec;
 
+    public Animator animator;   // 애니메이션 동작을 위한 선언  
+
     private void Awake()
     {
         if (instance == null)
@@ -83,6 +85,7 @@ public class ControllTest : MonoBehaviour
         }
         if (moveit)
         {
+            animator.SetBool("isRunning", true);
             float dis = targetpos.x - transform.position.x; // 마우스 좌표 - 현재 캐릭터 좌표
             if (Mathf.Abs(dis) <= error)
             {
@@ -98,6 +101,10 @@ public class ControllTest : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 180, 0);
                 transform.Translate(Vector3.right * speed * Time.deltaTime);
             }
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);   // 움직이지 않는 동안
         }
     }
 }

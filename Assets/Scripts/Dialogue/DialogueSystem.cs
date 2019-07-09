@@ -20,6 +20,7 @@ public class DialogueSystem : MonoBehaviour
     private Image panel; // 대화 중 다른 기능 금지
     private GameObject dialogueButton;  // 대화 버튼
     private GameObject dialogueUI;   // 대화 UI
+    private GameObject prevButton;   // 이전 대화 버튼
 
     // 인게임 대화에 필요한 변수
     private GameObject player; // 플레이어 오브젝트 
@@ -51,7 +52,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueBox = dialogueUI.transform.Find("Dialogue Box").GetComponent<Image>();
         txt = dialogueBox.transform.Find("Dialogue Text").GetComponent<Text>();
         panel = dialogueUI.transform.Find("Dialogue Panel").GetComponent<Image>();
- 
+        prevButton = dialogueBox.transform.Find("Prev Button").gameObject;
     }
 
     private void OnOff(bool _flag)
@@ -175,7 +176,9 @@ public class DialogueSystem : MonoBehaviour
             {
                 //cameraCtrl.dollyZoomIn = true;
                 dialogueButton.SetActive(false);
-                if (Input.GetMouseButtonUp(0))
+                if (count <= 1) prevButton.SetActive(false);    // 첫번째 대화에서는 이전버튼 안보이게 설정
+                else prevButton.SetActive(true);
+            if (Input.GetMouseButtonUp(0))
                 {
                     if (count < dialogueData.Count)
                         {
