@@ -44,7 +44,10 @@ public class Controll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+<<<<<<< HEAD
  
+=======
+>>>>>>> d30b6710135054a871a50d7415c157600896552d
         float screenHeight = Screen.height; // 스크린 높이
         float screenWidth = Screen.width;   // 스크린 넓이
 

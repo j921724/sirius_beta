@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// 캐릭터 조작 관련 스크립트
 /// </summary>
-public class ControladdForce : MonoBehaviour
+public class ControlAddForce : MonoBehaviour
 {
     //---------------------------------------------------------------------------------------------
-    private ControladdForce instance = null;
+    private ControlAddForce instance = null;
 
 
     public bool moveit = false; // 이동 가능 여부
@@ -23,14 +23,27 @@ public class ControladdForce : MonoBehaviour
     private float halfWidth;
     private float rightButtonSec;
     private float leftButtonSec;
-    public float speed; // 캐릭터 이동 속도
+    public float speed = 20.0f; // 캐릭터 이동 속도
 
 
     //---------------------------------------------------------------------------------------------
-
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+        characterBox = gameObject.GetComponent<BoxCollider2D>();
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
         //---------------------------------------------------------------------------------------------
         minBound = boundBox.bounds.min;
         maxBound = boundBox.bounds.max;
@@ -42,24 +55,27 @@ public class ControladdForce : MonoBehaviour
         //---------------------------------------------------------------------------------------------
 
 
-        // 텔레포트할 시 도플갱어 삭제
-        if (instance == null)
-        {
-            DontDestroyOnLoad(this.gameObject);
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+        rightButtonSec = (screenWidth / 4) * 3;
+        leftButtonSec = screenWidth / 4;
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        characterBox = gameObject.GetComponent<BoxCollider2D>();
+        boundBox = GameObject.FindGameObjectWithTag("Background").GetComponent<BoxCollider2D>();
+
+        minBound = boundBox.bounds.min;
+        maxBound = boundBox.bounds.max;
+
+        halfWidth = (characterBox.size.x) / 2f;
+
+        float screenHeight = Screen.height; // 스크린 높이
+        float screenWidth = Screen.width;   // 스크린 넓이
+        //---------------------------------------------------------------------------------------------
 
 
         rightButtonSec = (screenWidth / 4) * 3;
         leftButtonSec = screenWidth / 4;
-
-        Debug.Log(leftButtonSec);
-
-
     }
 
     // Update is called once per frame

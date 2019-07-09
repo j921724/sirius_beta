@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/// <summary>
+/// 대화 이외의 대사를 출력할 때 사용하는 스크립트
+/// 인트로 씬 위주로 사용
+/// </summary>
 [System.Serializable]
 public class EventDialogueTextPosion
 {
@@ -10,20 +13,18 @@ public class EventDialogueTextPosion
     public Vector3 txtNPC = new Vector3(150.0f, 200.0f, 0.0f);// NPC 쪽 텍스트 위치
 }
 
+
 public class EventDialogueSystem : MonoBehaviour
 {
 
     // 텍스트 UI를 연동하기 위한 변수
-    public string txtFile; // 스크립트 파일 이름
+    public Scene1DataBase scene1DB; // scene1에 필요한 데이터 추출
     private Image dialogueBox;
     private Text txt; // 텍스트 오브젝트
-    private Image panel; // 대화 중 다른 기능 금지
-    private GameObject dialogueButton;  // 대화 버튼
-    private GameObject dialogueUI;   // 대화 UI
+    [SerializeField] private Image panel; // 대화 중 다른 기능 금지
+    [SerializeField] private GameObject dialogueUI;   // 대화 UI
 
     // 인게임 대화에 필요한 변수
-    private GameObject player; // 플레이어 오브젝트 
-    private float error = 8.0f; // 버튼 출력하기 위한 거리
     public int count = 0; // 텍스트 문서 단위
     public bool talking = false; // 텍스트 UI 활성화 트리거
 
@@ -32,30 +33,27 @@ public class EventDialogueSystem : MonoBehaviour
     public EventDialogueTextPosion eventDialogueTextPosion;
     Vector3 txtPlayer; // 플레이어 쪽 텍스트 위치
     Vector3 txtNPC; // NPC 쪽 텍스트 위치
-
-    // 카메라 조작에 필요한 변수
-    //public DollyZoom cameraCtrl;
-
+    
     public List<Dictionary<string, object>> dialogueData;
+
+    public Scene1Manager scene1Manager;
 
     void Start()
     {
-        if (GameObject.FindWithTag("Mary") != null)
-        {
-            player = GameObject.FindWithTag("Mary").gameObject;
-        }
-       
-        dialogueData = CSVReader.Read(txtFile);
+        scene1Manager = FindObjectOfType<Scene1Manager>();
+        scene1DB = scene1Manager.scene1DB[scene1Manager.process];
+        dialogueData = CSVReader.Read(scene1DB.textFile);
+        
+
         dialogueUI = GameObject.Find("Dialogue UI");
         dialogueBox = dialogueUI.transform.Find("Dialogue Box").GetComponent<Image>();
         txt = dialogueBox.transform.Find("Dialogue Text").GetComponent<Text>();
         panel = dialogueUI.transform.Find("Dialogue Panel").GetComponent<Image>();
-
     }
 
     private void OnOff(bool _flag)
     {
-        panel.gameObject.SetActive(_flag);
+        //panel.gameObject.SetActive(_flag);
         dialogueBox.gameObject.SetActive(_flag);
         txt.gameObject.SetActive(_flag);
     }
